@@ -3,6 +3,7 @@ package io.schinzel.my_package
 import com.atexpose.AtExpose
 import com.atexpose.dispatcher_factories.CliFactory
 import com.atexpose.dispatcher_factories.WebServerBuilder
+import io.schinzel.basic_utils_kotlin.println
 
 /**
  * Starts a web server and a command line interface.
@@ -26,4 +27,7 @@ fun main() {
             .build())
         // Start command line interface
         .start(CliFactory.create())
+    "*".repeat(30).println()
+    "Web server and cli started.".println()
+    "*".repeat(30).println()
 }
