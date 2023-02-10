@@ -7,7 +7,7 @@
     <artifactId>web-app-starter</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <parent>
         <artifactId>web-apps</artifactId>
@@ -77,8 +77,8 @@
                                     <mainClass>io.schinzel.my_package.StartWebKt</mainClass>
                                 </transformer>
                             </transformers>
-                            <!-- Name of jar file. Will be myJar.jar -->
-                            <finalName>../myJar</finalName>
+                            <!-- Name and path of jar file. Will be myJar.jar. Will appear in root of project -->
+                            <finalName>../../../../myJar</finalName>
                         </configuration>
                     </execution>
                 </executions>
