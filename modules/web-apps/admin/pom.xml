@@ -5,18 +5,28 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>admin</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>pom</packaging>
 
     <parent>
         <artifactId>web-apps</artifactId>
         <groupId>io.schinzel</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
 
 
     <dependencies>
         <!-- INTERNAL -->
+        <dependency>
+            <artifactId>db</artifactId>
+            <groupId>io.schinzel</groupId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <artifactId>file-storage</artifactId>
+            <groupId>io.schinzel</groupId>
+            <version>1.0</version>
+        </dependency>
         <!-- EXTERNAL -->
         <!-- INTERNAL TEST -->
         <!-- EXTERNAL TEST -->
