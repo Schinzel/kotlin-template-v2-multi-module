@@ -9,9 +9,9 @@
     <packaging>pom</packaging>
 
     <parent>
-        <artifactId>kotlin-template-v2-multi-module</artifactId>
+        <artifactId>basemodule</artifactId>
         <groupId>io.schinzel</groupId>
-        <version>1.0</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
 
