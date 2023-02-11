@@ -5,3 +5,7 @@ class MyClass1 {
         println("MyClass1.doIt()")
     }
 }
+
+fun main() {
+    MyClass1().doIt()
+}
