@@ -16,6 +16,7 @@
     </properties>
 
     <modules>
+        <module>logic</module>
         <module>sites</module>
     </modules>
 
