@@ -16,7 +16,7 @@
     </properties>
 
     <modules>
-        <module>web-apps</module>
+        <module>sites</module>
     </modules>
 
 
