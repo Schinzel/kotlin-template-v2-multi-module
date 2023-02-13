@@ -16,8 +16,8 @@
     </properties>
 
     <modules>
-        <module>module1</module>
-        <module>module2</module>
+        <module>admin</module>
+        <module>public</module>
         <module>web-app-starter</module>
     </modules>
 
