@@ -19,6 +19,7 @@
         <module>admin</module>
         <module>public</module>
         <module>web-app-starter</module>
+        <module>web-apps</module>
     </modules>
 
 
