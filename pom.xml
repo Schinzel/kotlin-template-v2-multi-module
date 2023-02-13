@@ -18,7 +18,7 @@
     <modules>
         <module>module1</module>
         <module>module2</module>
-        <module>finalmodule</module>
+        <module>web-app-starter</module>
     </modules>
 
 
