@@ -16,6 +16,6 @@
 
     <modules>
         <module>logic</module>
-        <module>web-apps</module>
+        <module>sites</module>
     </modules>
 </project>

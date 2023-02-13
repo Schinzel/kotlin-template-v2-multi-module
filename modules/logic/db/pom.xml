@@ -6,7 +6,7 @@
 
     <artifactId>db</artifactId>
     <version>1.0</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <parent>
         <artifactId>logic</artifactId>
