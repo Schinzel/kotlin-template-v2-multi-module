@@ -17,16 +17,16 @@
 
     <dependencies>
         <!-- INTERNAL -->
-<!--        <dependency>
+        <dependency>
             <groupId>io.schinzel</groupId>
-            <artifactId>module1</artifactId>
+            <artifactId>admin</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>io.schinzel</groupId>
-            <artifactId>module2</artifactId>
+            <artifactId>public</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>-->
+        </dependency>
         <!-- EXTERNAL -->
         <!-- INTERNAL TEST -->
         <!-- EXTERNAL TEST -->
