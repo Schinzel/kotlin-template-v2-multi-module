@@ -8,7 +8,7 @@ fun main() {
 
 class WebServer {
     init {
-        Javalin.create()
+        val javalin = Javalin.create()
             .get("/") { ctx -> ctx.result("Hello Public World") }
             .start(5555)
     }
