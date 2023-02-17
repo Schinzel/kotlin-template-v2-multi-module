@@ -2,6 +2,7 @@ package io.schinzel.sites.public
 
 import io.javalin.Javalin
 import io.javalin.http.staticfiles.Location
+import io.schinzel.logic.db.MyDb
 
 fun main() {
     PublicWebServer()
@@ -13,6 +14,7 @@ fun main() {
  */
 class PublicWebServer {
     init {
+        MyDb()
         Javalin.create { config ->
             config.staticFiles.add("/site_public", Location.CLASSPATH)
         }

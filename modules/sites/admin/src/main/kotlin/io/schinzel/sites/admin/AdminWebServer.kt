@@ -2,6 +2,7 @@ package io.schinzel.sites.admin
 
 import io.javalin.Javalin
 import io.javalin.http.staticfiles.Location
+import io.schinzel.logic.db.MyDb
 
 fun main() {
     AdminWebServer()
@@ -9,6 +10,7 @@ fun main() {
 
 class AdminWebServer {
     init {
+        MyDb()
         Javalin.create { config ->
             config.staticFiles.add("/site_admin", Location.CLASSPATH)
         }
