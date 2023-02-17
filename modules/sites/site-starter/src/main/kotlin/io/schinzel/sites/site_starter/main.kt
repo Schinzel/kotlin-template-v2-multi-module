@@ -1,4 +1,4 @@
-package io.schinzel
+package io.schinzel.sites.site_starter
 
 
 fun main() {
