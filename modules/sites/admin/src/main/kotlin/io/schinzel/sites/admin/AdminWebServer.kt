@@ -4,10 +4,10 @@ import io.javalin.Javalin
 import io.javalin.http.staticfiles.Location
 
 fun main() {
-    WebServer()
+    AdminWebServer()
 }
 
-class WebServer {
+class AdminWebServer {
     init {
         Javalin.create { config ->
             config.staticFiles.add("/site_admin", Location.CLASSPATH)

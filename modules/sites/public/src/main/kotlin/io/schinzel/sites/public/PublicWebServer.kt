@@ -4,14 +4,14 @@ import io.javalin.Javalin
 import io.javalin.http.staticfiles.Location
 
 fun main() {
-    WebServer()
+    PublicWebServer()
 }
 
 /**
  * http://127.0.0.1:5555/
  * http://127.0.0.1:5555/index.html
  */
-class WebServer {
+class PublicWebServer {
     init {
         Javalin.create { config ->
             config.staticFiles.add("/site_public", Location.CLASSPATH)
