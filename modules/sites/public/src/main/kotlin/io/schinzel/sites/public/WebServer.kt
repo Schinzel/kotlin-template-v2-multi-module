@@ -1,4 +1,4 @@
-package project.sites.public
+package io.schinzel.sites.public
 
 import io.javalin.Javalin
 import io.javalin.http.staticfiles.Location

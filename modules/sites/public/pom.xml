@@ -82,7 +82,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>project.sites.public.WebServerKt</mainClass>
+                                    <mainClass>io.schinzel.sites.public.WebServerKt</mainClass>
                                 </transformer>
                             </transformers>
                             <!-- Name and path of jar file. Will be myJar.jar. Will appear in root of project -->
