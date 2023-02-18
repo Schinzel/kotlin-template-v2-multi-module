@@ -17,6 +17,7 @@
     <modules>
         <module>admin</module>
         <module>public</module>
+        <module>shared</module>
         <module>site-starter</module>
   </modules>
 
