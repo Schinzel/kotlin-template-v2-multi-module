@@ -1,5 +1,5 @@
 export class Bapp {
-    rapIt(){
-        return "Rapped it!"
+    bappIt(){
+        return "Bapped it!"
     }
 }
