@@ -1,5 +1,0 @@
-# This is a comment
-echo "hej"
-# Another comment
-ping
-time
