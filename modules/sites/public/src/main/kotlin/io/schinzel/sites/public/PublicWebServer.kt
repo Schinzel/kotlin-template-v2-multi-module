@@ -16,8 +16,7 @@ class PublicWebServer {
     init {
         MyDb()
         Javalin.create { config ->
-            config.staticFiles.add("/site_public", Location.CLASSPATH)
-            config.staticFiles.add("/shared", Location.CLASSPATH)
+            config.staticFiles.add("/my_project/sites/public", Location.CLASSPATH)
         }
             .get("/") { ctx -> ctx.result("Hello Public World") }
             .start(5555)

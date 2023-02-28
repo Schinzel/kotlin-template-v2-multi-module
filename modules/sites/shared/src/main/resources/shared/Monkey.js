@@ -1,5 +1,5 @@
 export class Monkey{
     doIt(){
-        console.log("Monkey was a good boy")
+        console.log("Monkey was a very good boy")
     }
 }
