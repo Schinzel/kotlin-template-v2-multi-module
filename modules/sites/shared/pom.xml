@@ -29,17 +29,33 @@
                 <version>3.3.0</version>
                 <executions>
                     <execution>
-                        <id>copy-resources</id>
+                        <id>copy-resources-to-admin</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>../admin/src/main/resources/site_admin/shared</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources/shared</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-resources-to-public</id>
                         <phase>validate</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
                             <outputDirectory>../public/src/main/resources/site_public/shared</outputDirectory>
-                            <outputDirectory>../admin/src/main/resources/site_admin/shared</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>src/main/resources/shared</directory>
+                                    <filtering>true</filtering>
                                 </resource>
                             </resources>
                         </configuration>
