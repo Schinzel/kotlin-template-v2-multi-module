@@ -36,8 +36,9 @@ class PublicWebServer {
 //            // expose endpoints via class
 //            .exposeClassEndpoints(MyApi::class)
 
-        Javalin.create {
-            it.addStaticFiles("/my_project/sites/public", Location.CLASSPATH)
+        Javalin.create {config ->
+            config.addStaticFiles("/my_project/sites/public", Location.CLASSPATH)
+            config.accessManager { handler, ctx, _ -> handler.handle(ctx) }
         }
             .get("/") { ctx -> ctx.result("Hello Public World") }
             .exposeClassEndpoints(MyApi::class)
