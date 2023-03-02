@@ -26,25 +26,12 @@
             <url>https://s3-eu-west-1.amazonaws.com/maven-repo.schinzel.io/release</url>
         </repository>
         <repository>
-            <id>io.schinzel.release</id>
-            <url>https://s3-eu-west-1.amazonaws.com/maven-repo.atexpose.com/release</url>
+            <id>maven-repo.refur.se</id>
+            <url>https://s3-eu-west-1.amazonaws.com/maven-repo.refur.se/release</url>
         </repository>
     </repositories>
 
     <dependencies>
-        <dependency>
-            <!-- Web server, scheduled tasks and more -->
-            <artifactId>atexpose</artifactId>
-            <groupId>com.atexpose</groupId>
-            <version>1.0.5</version>
-        </dependency>
-        <dependency>
-            <!-- Basic utilities for Java (and Kotlin to some degree).
-            Most commonly the utilities are less verbose versions of common code snippets.-->
-            <groupId>io.schinzel</groupId>
-            <artifactId>basic-utils</artifactId>
-            <version>1.6.2</version>
-        </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
@@ -61,6 +48,11 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>2.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>se.refur</groupId>
+            <artifactId>javalin</artifactId>
+            <version>1.1.1</version>
         </dependency>
 
         <!-- TEST -->

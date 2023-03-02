@@ -12,7 +12,7 @@ class AdminWebServer {
     init {
         MyDb()
         Javalin.create { config ->
-            config.staticFiles.add("/site_admin", Location.CLASSPATH)
+            config.addStaticFiles("/my_project/sites/admin", Location.CLASSPATH)
         }
             .get("/") { ctx -> ctx.result("Hello Admin World") }
             .start(5555)

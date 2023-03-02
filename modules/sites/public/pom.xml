@@ -18,17 +18,17 @@
     <dependencies>
         <!-- INTERNAL -->
         <dependency>
+            <artifactId>shared</artifactId>
+            <groupId>io.schinzel</groupId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <artifactId>db</artifactId>
             <groupId>io.schinzel</groupId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <artifactId>file-storage</artifactId>
-            <groupId>io.schinzel</groupId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <artifactId>shared</artifactId>
             <groupId>io.schinzel</groupId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
@@ -39,14 +39,6 @@
 
     <build>
         <sourceDirectory>src/main/kotlin</sourceDirectory>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-            <resource>
-                <directory>../shared/src/main/resources</directory>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>

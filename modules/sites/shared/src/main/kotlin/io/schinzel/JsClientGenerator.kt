@@ -1,0 +1,100 @@
+package io.schinzel
+
+import io.schinzel.basic_utils_kotlin.println
+import io.schinzel.basicutils.file.FileWriter
+
+
+/**
+ * The central method for this project. Generates a JavaScript file containing
+ * a client to invoke the endpoints in the argument list of packages.
+ *
+ * @param sourcePackageNames A list of names of Kotlin packages in which to look
+ * for Javalin annotations endpoints.
+ * @param destinationFile The name of the file into which the generated JavaScript
+ * will be written. E.g. "src/main/resources/my_site/js/classes.js"
+ */
+class JsClientGenerator(sourcePackageNames: List<String>, destinationFile: String) {
+
+    constructor(sourcePackageName: String, destinationFile: String)
+            : this(listOf(sourcePackageName), destinationFile)
+
+    init {
+        val startExecutionTime = System.nanoTime()
+        // Check so that argument destination file name is ok
+        validateFile(destinationFile)
+
+        val fileContent = "" +
+                HEADER +
+                DATA_OBJECT_CLASS
+
+        FileWriter.writer()
+            .fileName(destinationFile)
+            .content(fileContent)
+            .write()
+
+        // Calc execution time
+        val jobExecutionTimeInSeconds = (System.nanoTime() - startExecutionTime) /
+                1_000_000_000
+        val feedback = "JsClientGenerator ran! " +
+                "Generated a file named $destinationFile." +
+                "0000 Javalin endpoints can now be invoked using the JsClient. " +
+                "The job took $jobExecutionTimeInSeconds seconds."
+        feedback.println()
+    }
+
+
+    companion object {
+        private fun validateFile(fileName: String) {
+            if (!fileName.endsWith(".js")) {
+                throw Exception("Destination file must have the extension js")
+            }
+        }
+
+
+        private val HEADER = """
+            |/**
+            | * The purpose of this class is to send requests to the server.
+            | * There is one function per endpoint in the API.
+            | * This class has been automatically generated from the endpoints
+            | * set set up with Javalin annotations.
+            | */
+            |
+        """.trimMargin()
+
+
+        val DATA_OBJECT_CLASS = """
+            | // noinspection JSUnusedLocalSymbols
+            |/**
+            | * This class holds methods common to all transpiled classes.
+            | */
+            |class DataObject {
+            |    // noinspection JSUnusedGlobalSymbols
+            |    /**
+            |     * return {object} This instance as a json object
+            |     */
+            |    asJsonObject() {
+            |        return JSON.parse(JSON.stringify(this));
+            |    }
+            |
+            |    // noinspection JSUnusedGlobalSymbols
+            |    /**
+            |     * return {string} This instance as a json string
+            |     */
+            |    asJsonString() {
+            |        return JSON.stringify(this);
+            |    }
+            |
+            |    // noinspection JSUnusedGlobalSymbols
+            |    /**
+            |     * return {object} A clone of this object
+            |     */
+            |    clone() {
+            |        return new this.constructor(this.asJsonObject());
+            |    }
+            |}
+            |
+            |
+        """.trimMargin()
+    }
+
+}

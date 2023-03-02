@@ -5,14 +5,12 @@
     <title>My First Title</title>
 </head>
 <body>
-    <h1>Public site</h1>
+    <h1>Admin site</h1>
     <script type="module">
-        import {Monkey} from "./Monkey.js";
-        import {Bapp} from "./Bapp.js";
 
+        import {Monkey} from "./shared/Monkey.js";
 
-        new Bapp().bappIt()
-        new Monkey()
+        new Monkey().doIt()
     </script>
 </body>
 </html>

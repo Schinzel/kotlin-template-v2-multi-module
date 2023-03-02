@@ -18,6 +18,11 @@
     <dependencies>
         <!-- INTERNAL -->
         <dependency>
+            <artifactId>shared</artifactId>
+            <groupId>io.schinzel</groupId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <artifactId>db</artifactId>
             <groupId>io.schinzel</groupId>
             <version>1.0-SNAPSHOT</version>
