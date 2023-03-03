@@ -2,6 +2,7 @@ package io.schinzel.sites.public_site
 
 import io.schinzel.apigenerator.js.JsClientGenerator
 
+
 fun main() {
     JsClientGenerator(
         sourcePackageNames = listOf(
