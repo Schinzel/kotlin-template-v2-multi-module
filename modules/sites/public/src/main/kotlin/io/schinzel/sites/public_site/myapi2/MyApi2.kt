@@ -1,6 +1,7 @@
 package io.schinzel.sites.public_site.myapi2
 
 import io.javalin.http.HandlerType
+import io.schinzel.basicutils.RandomUtil
 import se.refur.javalin.Api
 import se.refur.javalin.Param
 import se.refur.javalin.ParameterType
@@ -12,6 +13,6 @@ class MyApi2 {
         @Param("name", ParameterType.QUERY) userName: String,
         @Param("age", ParameterType.QUERY) userAge: Int,
         @Param("date", ParameterType.QUERY) requestDate: LocalDate
-    ): String = "success"
+    ): String = "success " + RandomUtil.getRandomString(5)
 
 }
