@@ -1,4 +1,4 @@
-package io.schinzel.jsclientgen
+package io.schinzel.apigenerator
 
 import io.schinzel.basicutils.thrower.Thrower
 import se.refur.javalin.Param

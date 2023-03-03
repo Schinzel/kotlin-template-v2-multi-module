@@ -1,10 +1,52 @@
-/**
- * The purpose of this class is to send requests to the server.
- * There is one function per endpoint in the API.
- * This class has been automatically generated from the endpoints
- * set set up with Javalin annotations.
- */
+package io.schinzel.apigenerator.js
 
+object JsFile {
+    val HEADER = """
+            |/**
+            | * The purpose of this class is to send requests to the server.
+            | * There is one function per endpoint in the API.
+            | * This class has been automatically generated from the endpoints
+            | * set set up with Javalin annotations.
+            | */
+            |
+        """.trimMargin()
+
+    val DATA_OBJECT_CLASS = """
+            | // noinspection JSUnusedLocalSymbols
+            |/**
+            | * This class holds methods common to all transpiled classes.
+            | */
+            |class DataObject {
+            |    // noinspection JSUnusedGlobalSymbols
+            |    /**
+            |     * return {object} This instance as a json object
+            |     */
+            |    asJsonObject() {
+            |        return JSON.parse(JSON.stringify(this));
+            |    }
+            |
+            |    // noinspection JSUnusedGlobalSymbols
+            |    /**
+            |     * return {string} This instance as a json string
+            |     */
+            |    asJsonString() {
+            |        return JSON.stringify(this);
+            |    }
+            |
+            |    // noinspection JSUnusedGlobalSymbols
+            |    /**
+            |     * return {object} A clone of this object
+            |     */
+            |    clone() {
+            |        return new this.constructor(this.asJsonObject());
+            |    }
+            |}
+            |
+            |
+        """.trimMargin()
+
+
+    var SERVER_CALLER_INTERNAL_CLASS = """
 const REQUEST_TIMEOUT = 60000;
 
 // noinspection JSUnusedGlobalSymbols
@@ -34,7 +76,7 @@ class ServerCallerInt {
             let responseText = jqXHR.responseText ?
                 jqXHR.responseText
                 : "No error text from server";
-            throw(`Error calling server ${responseText}`);
+            throw(`Error calling server ${"$"}{responseText}`);
         };
     }
 
@@ -95,7 +137,7 @@ class ServerCallerInt {
      */
     call() {
         let requestPathWithHost = getAjaxUrl(this._requestPath);
-        console.log(`requesting API url '${this._requestPath}'`);
+        console.log(`requesting API url '${"$"}{this._requestPath}'`);
         $.ajax({
             type: "POST",
             url: requestPathWithHost,
@@ -147,7 +189,7 @@ function getAjaxUrl(path) {
  */
 function handleFail(responseText, statusCode) {
     const httpStatusUnauthorized = 401;
-    console.error(`statusCode: '${statusCode}' responseText: '${responseText}'`);
+    console.error(`statusCode: '${"$"}{statusCode}' responseText: '${"$"}{responseText}'`);
     // Check if the status is unauthorized
     if (statusCode === httpStatusUnauthorized) {
         /** @type {{error: String, redirectPage: String}} */
@@ -172,33 +214,5 @@ function toJSON(str) {
     }
 }
 
- // noinspection JSUnusedLocalSymbols
-/**
- * This class holds methods common to all transpiled classes.
- */
-class DataObject {
-    // noinspection JSUnusedGlobalSymbols
-    /**
-     * return {object} This instance as a json object
-     */
-    asJsonObject() {
-        return JSON.parse(JSON.stringify(this));
-    }
-
-    // noinspection JSUnusedGlobalSymbols
-    /**
-     * return {string} This instance as a json string
-     */
-    asJsonString() {
-        return JSON.stringify(this);
-    }
-
-    // noinspection JSUnusedGlobalSymbols
-    /**
-     * return {object} A clone of this object
-     */
-    clone() {
-        return new this.constructor(this.asJsonObject());
-    }
+"""
 }
-

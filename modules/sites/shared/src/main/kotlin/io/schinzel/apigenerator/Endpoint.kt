@@ -1,4 +1,4 @@
-package io.schinzel.jsclientgen
+package io.schinzel.apigenerator
 
 import io.javalin.http.HandlerType
 import se.refur.javalin.Api

@@ -1,6 +1,7 @@
-package io.schinzel.jsclientgen
+package io.schinzel.apigenerator.js
 
 
+import io.schinzel.apigenerator.Endpoint
 import io.schinzel.basic_utils_kotlin.println
 import io.schinzel.basic_utils_kotlin.printlnWithPrefix
 import io.schinzel.basicutils.file.FileWriter
@@ -48,11 +49,12 @@ class JsClientGenerator(sourcePackageNames: List<String>, destinationFile: Strin
                     param.printlnWithPrefix("Param")
                 }
             }
-        
+
 
         val fileContent = "" +
-                HEADER +
-                DATA_OBJECT_CLASS
+                JsFile.HEADER +
+                JsFile.SERVER_CALLER_INTERNAL_CLASS +
+                JsFile.DATA_OBJECT_CLASS
 
         FileWriter.writer()
             .fileName(destinationFile)
@@ -73,55 +75,8 @@ class JsClientGenerator(sourcePackageNames: List<String>, destinationFile: Strin
     companion object {
         private fun validateFile(fileName: String) {
             if (!fileName.endsWith(".js")) {
-                throw Exception("Destination file must have the extension js")
+                throw Exception("Destination file must have the extension '.js'")
             }
         }
-
-
-        private val HEADER = """
-            |/**
-            | * The purpose of this class is to send requests to the server.
-            | * There is one function per endpoint in the API.
-            | * This class has been automatically generated from the endpoints
-            | * set set up with Javalin annotations.
-            | */
-            |
-        """.trimMargin()
-
-
-        val DATA_OBJECT_CLASS = """
-            | // noinspection JSUnusedLocalSymbols
-            |/**
-            | * This class holds methods common to all transpiled classes.
-            | */
-            |class DataObject {
-            |    // noinspection JSUnusedGlobalSymbols
-            |    /**
-            |     * return {object} This instance as a json object
-            |     */
-            |    asJsonObject() {
-            |        return JSON.parse(JSON.stringify(this));
-            |    }
-            |
-            |    // noinspection JSUnusedGlobalSymbols
-            |    /**
-            |     * return {string} This instance as a json string
-            |     */
-            |    asJsonString() {
-            |        return JSON.stringify(this);
-            |    }
-            |
-            |    // noinspection JSUnusedGlobalSymbols
-            |    /**
-            |     * return {object} A clone of this object
-            |     */
-            |    clone() {
-            |        return new this.constructor(this.asJsonObject());
-            |    }
-            |}
-            |
-            |
-        """.trimMargin()
     }
-
 }
