@@ -12,9 +12,10 @@ class Endpoint(method: Method) {
     val parameters: List<EndpointParameter> = method.parameters
         .filter { it.isAnnotationPresent(Param::class.java) }
         .map { EndpointParameter(it) }
+    val returnDataType = method.returnType.simpleName
 
 
     override fun toString(): String {
-        return "path = $path, requestType = $requestType"
+        return "path = $path, requestType = $requestType, returnDataType = $returnDataType"
     }
 }
