@@ -5,6 +5,42 @@
  * set set up with Javalin annotations.
  */
 
+export class ServerCaller {
+
+    /**
+     * No description available
+     * @returns {Promise<string>}
+     */
+    async second(){
+        let response = await new ServerCallerInt()
+            .setPath('/api/second')
+            .callWithPromise();
+        return response;
+    }
+
+    /**
+     * No description available
+     * @returns {Promise<string>}
+     */
+    async myOtherEndpoint(){
+        let response = await new ServerCallerInt()
+            .setPath('myOtherEndpoint')
+            .callWithPromise();
+        return response;
+    }
+
+    /**
+     * No description available
+     * @returns {Promise<string>}
+     */
+    async myEndpoint(){
+        let response = await new ServerCallerInt()
+            .setPath('/api/v1/myEndpoint')
+            .callWithPromise();
+        return response;
+    }
+}
+
 const REQUEST_TIMEOUT = 60000;
 
 // noinspection JSUnusedGlobalSymbols

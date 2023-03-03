@@ -50,11 +50,19 @@ class JsClientGenerator(sourcePackageNames: List<String>, destinationFile: Strin
                 }
             }
 
+        val endpoints: List<Endpoint> = Reflections(sourcePackageNames, MethodsAnnotated)
+            .getMethodsAnnotatedWith(Api::class.java)
+            .map { Endpoint(it) }
+
+        val jsFunctions = endpoints.joinToString("") { JsFunction(it).jsFunction }
 
         val fileContent = "" +
-                JsFile.HEADER +
-                JsFile.SERVER_CALLER_INTERNAL_CLASS +
-                JsFile.DATA_OBJECT_CLASS
+                JsFileStaticTexts.HEADER +
+                ServerCallerStaticTexts.start +
+                jsFunctions +
+                ServerCallerStaticTexts.end +
+                JsFileStaticTexts.SERVER_CALLER_INTERNAL_CLASS +
+                JsFileStaticTexts.DATA_OBJECT_CLASS
 
         FileWriter.writer()
             .fileName(destinationFile)

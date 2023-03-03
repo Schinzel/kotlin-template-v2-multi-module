@@ -1,6 +1,6 @@
 package io.schinzel.apigenerator.js
 
-object JsFile {
+object JsFileStaticTexts {
     val HEADER = """
             |/**
             | * The purpose of this class is to send requests to the server.
@@ -8,6 +8,7 @@ object JsFile {
             | * This class has been automatically generated from the endpoints
             | * set set up with Javalin annotations.
             | */
+            |
             |
         """.trimMargin()
 
