@@ -1,9 +1,6 @@
 package io.schinzel.apigenerator.js
 
 import io.schinzel.apigenerator.Endpoint
-import io.schinzel.basic_utils_kotlin.printlnWithPrefix
-
-//Gör först utan parametrar
 /**
  *    /**
  *      * No description available
