@@ -34,22 +34,6 @@ class JsClientGenerator(sourcePackageNames: List<String>, destinationFile: Strin
         validateFile(destinationFile)
 
 
-        Reflections(sourcePackageNames, MethodsAnnotated)
-            .getMethodsAnnotatedWith(Api::class.java)
-            .size
-            .printlnWithPrefix("1")
-
-        Reflections(sourcePackageNames, MethodsAnnotated)
-            .getMethodsAnnotatedWith(Api::class.java)
-            .forEach { method: Method ->
-                val endpoint = Endpoint(method)
-
-                endpoint.printlnWithPrefix("Endpoint")
-                endpoint.parameters.forEach { param ->
-                    param.printlnWithPrefix("Param")
-                }
-            }
-
         val endpoints: List<Endpoint> = Reflections(sourcePackageNames, MethodsAnnotated)
             .getMethodsAnnotatedWith(Api::class.java)
             .map { Endpoint(it) }
