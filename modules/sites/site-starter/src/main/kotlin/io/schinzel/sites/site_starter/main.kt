@@ -2,7 +2,7 @@ package io.schinzel.sites.site_starter
 
 import io.schinzel.basicutils.configvar.ConfigVar
 import io.schinzel.sites.admin.AdminWebServer
-import io.schinzel.sites.public.PublicWebServer
+import io.schinzel.sites.public_site.PublicWebServer
 
 
 fun main() {

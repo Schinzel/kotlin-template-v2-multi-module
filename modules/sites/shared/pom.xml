@@ -18,6 +18,12 @@
     <dependencies>
         <!-- INTERNAL -->
         <!-- EXTERNAL -->
+        <dependency>
+            <!-- For finding annotated classes https://github.com/ronmamo/reflections. -->
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.10.2</version>
+        </dependency>
         <!-- INTERNAL TEST -->
         <!-- EXTERNAL TEST -->
     </dependencies>
