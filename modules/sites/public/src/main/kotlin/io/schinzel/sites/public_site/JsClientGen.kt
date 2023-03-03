@@ -1,6 +1,6 @@
 package io.schinzel.sites.public_site
 
-import io.schinzel.JsClientGenerator
+import io.schinzel.jsclientgen.JsClientGenerator
 
 fun main() {
     JsClientGenerator(

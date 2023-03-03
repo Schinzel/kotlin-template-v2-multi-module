@@ -1,20 +1,13 @@
-package io.schinzel
+package io.schinzel.jsclientgen
 
 
-import com.google.common.annotations.VisibleForTesting
 import io.schinzel.basic_utils_kotlin.println
 import io.schinzel.basic_utils_kotlin.printlnWithPrefix
 import io.schinzel.basicutils.file.FileWriter
 import org.reflections.Reflections
-import org.reflections.scanners.MethodAnnotationsScanner
-import org.reflections.scanners.Scanners
-import org.reflections.scanners.Scanners.*
-import org.reflections.util.ClasspathHelper
-import org.reflections.util.ConfigurationBuilder
+import org.reflections.scanners.Scanners.MethodsAnnotated
 import se.refur.javalin.Api
-import se.refur.javalin.Param
 import java.lang.reflect.Method
-import java.net.URL
 
 
 /**
@@ -48,30 +41,14 @@ class JsClientGenerator(sourcePackageNames: List<String>, destinationFile: Strin
         Reflections(sourcePackageNames, MethodsAnnotated)
             .getMethodsAnnotatedWith(Api::class.java)
             .forEach { method: Method ->
-                val annotation = method.getAnnotation(Api::class.java)
-                annotation.path.printlnWithPrefix("Path")
-                annotation.type.printlnWithPrefix("Handler type")
-                method.parameters
-                    .filter { it.isAnnotationPresent(Param::class.java) }
-                    .size
-                    .printlnWithPrefix("Number of params")
-                method.parameters
-                    .filter { it.isAnnotationPresent(Param::class.java) }
-                    .forEach { param ->
-                        val annotation = param.getAnnotation(Param::class.java)
-                        annotation.paramName.printlnWithPrefix("Param name")
-                        annotation.parameterType.printlnWithPrefix("Param type")
-                        param.type.simpleName.printlnWithPrefix("Param type")
-                    }
+                val endpoint = Endpoint(method)
+
+                endpoint.printlnWithPrefix("Endpoint")
+                endpoint.parameters.forEach { param ->
+                    param.printlnWithPrefix("Param")
+                }
             }
-
-        /**
-         * Sökt:
-         * 1) route
-         * 2) param names
-         * 3) param types
-         */
-
+        
 
         val fileContent = "" +
                 HEADER +
