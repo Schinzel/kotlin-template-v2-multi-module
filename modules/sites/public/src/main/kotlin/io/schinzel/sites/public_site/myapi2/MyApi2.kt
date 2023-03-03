@@ -12,7 +12,7 @@ class MyApi2 {
     fun apiQueryEndpoint(
         @Param("name", ParameterType.QUERY) userName: String,
         @Param("age", ParameterType.QUERY) userAge: Int,
-        @Param("date", ParameterType.QUERY) requestDate: LocalDate
+        @Param("something", ParameterType.QUERY) requestDate: Long
     ): String = "success " + RandomUtil.getRandomString(5)
 
 }

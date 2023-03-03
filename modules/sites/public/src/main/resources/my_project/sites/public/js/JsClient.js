@@ -11,11 +11,11 @@ export class ServerCaller {
     /**
      * No description available
      * @param {string} name
-     * @param {string} age
-     * @param {string} date
+     * @param {number} age
+     * @param {number} something
      * @returns {Promise<string>}
      */
-    async second(name, age, date){
+    async second(name, age, something){
         return await new ServerCallerInt()
             .setPath('/api/second')
             .callWithPromise();

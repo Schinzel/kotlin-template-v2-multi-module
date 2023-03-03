@@ -1,6 +1,7 @@
 package io.schinzel.apigenerator.js
 
 import io.schinzel.apigenerator.Endpoint
+import io.schinzel.basic_utils_kotlin.printlnWithPrefix
 
 //Gör först utan parametrar
 /**
@@ -25,7 +26,11 @@ class JsFunction(endpoint: Endpoint) {
     init {
         val jsDocParameters = endpoint.parameters
             .joinToString("\n") { endpointParameter ->
-                "     * @param {string} ${endpointParameter.name}"
+                val parameterName = endpointParameter.name
+                val jsDataType = JsDataTypeMapper
+                    .getJsDataType(endpointParameter.dataType)
+
+                "     * @param {$jsDataType} $parameterName"
             }
         val jsFunctionName = endpoint.path.substringAfterLast("/")
         val jsFunctionParameters = endpoint.parameters

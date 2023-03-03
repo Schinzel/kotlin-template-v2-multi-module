@@ -4,10 +4,10 @@ object JsDataTypeMapper {
     fun getJsDataType(kotlinDataType: String): String {
         return when (kotlinDataType) {
             "String" -> "string"
-            "Int" -> "number"
-            "Long" -> "number"
-            "Double" -> "number"
-            "Boolean" -> "boolean"
+            "int" -> "number"
+            "long" -> "number"
+            "double" -> "number"
+            "boolean" -> "boolean"
             else -> throw IllegalArgumentException("Unknown data type $kotlinDataType")
         }
     }
