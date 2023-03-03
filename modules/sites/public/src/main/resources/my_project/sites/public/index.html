@@ -5,18 +5,22 @@
     <title>My First Title</title>
 </head>
 <body>
-    <h1>Public site</h1>
-    <script type="module">
-        import {Bapp} from "./Bapp.js";
-        import {Monkey} from "./shared/Monkey.js";
-        import {ServerCaller} from "./js/JsClient.js";
+<h1>Public site</h1>
+<script type="module">
+    import {Bapp} from "./Bapp.js";
+    import {Monkey} from "./shared/Monkey.js";
+    import {ServerCaller} from "./js/JsClient.js";
 
 
-        new Bapp().bappIt()
-        new Monkey().doIt()
-        let response = await new ServerCaller()
-            .myEndpoint()
-        console.log('response' + response)
-    </script>
+    new Bapp().bappIt()
+    new Monkey().doIt()
+    let response = await new ServerCaller()
+        .myEndpoint()
+    console.log('response' + response)
+    new ServerCaller()
+        .myEndpoint()
+        .then(response => console.log('response' + response))
+        .catch(error => console.log('error' + error))
+</script>
 </body>
 </html>
