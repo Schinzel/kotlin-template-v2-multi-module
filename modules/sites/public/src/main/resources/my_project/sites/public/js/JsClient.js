@@ -11,7 +11,7 @@ export class ServerCaller {
      * No description available
      * @returns {Promise<string>}
      */
-    async second(){
+    async second(name, age, date){
         let response = await new ServerCallerInt()
             .setPath('/api/second')
             .callWithPromise();

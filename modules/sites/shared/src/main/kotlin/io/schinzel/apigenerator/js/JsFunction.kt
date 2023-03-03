@@ -1,7 +1,6 @@
 package io.schinzel.apigenerator.js
 
 import io.schinzel.apigenerator.Endpoint
-import io.schinzel.basic_utils_kotlin.println
 
 //Gör först utan parametrar
 /**
@@ -25,6 +24,10 @@ class JsFunction(endpoint: Endpoint) {
 
     init {
         val functionName = endpoint.path.substringAfterLast("/")
+        val jsFunctionParameters = endpoint.parameters
+            .joinToString(", ") { endpointParameter ->
+                endpointParameter.name
+            }
         val jsReturnDataType = JsDataTypeMapper.getJsDataType(endpoint.returnDataType)
         jsFunction = """
             |
@@ -32,7 +35,7 @@ class JsFunction(endpoint: Endpoint) {
             |     * No description available
             |     * @returns {Promise<$jsReturnDataType>}
             |     */
-            |    async $functionName(){
+            |    async $functionName($jsFunctionParameters){
             |        let response = await new ServerCallerInt()
             |            .setPath('${endpoint.path}')
             |            .callWithPromise();
