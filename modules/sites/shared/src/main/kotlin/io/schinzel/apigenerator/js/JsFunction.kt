@@ -23,7 +23,11 @@ class JsFunction(endpoint: Endpoint) {
     val jsFunction: String
 
     init {
-        val functionName = endpoint.path.substringAfterLast("/")
+        val jsDocParameters = endpoint.parameters
+            .joinToString("\n") { endpointParameter ->
+                "     * @param {string} ${endpointParameter.name}"
+            }
+        val jsFunctionName = endpoint.path.substringAfterLast("/")
         val jsFunctionParameters = endpoint.parameters
             .joinToString(", ") { endpointParameter ->
                 endpointParameter.name
@@ -33,13 +37,13 @@ class JsFunction(endpoint: Endpoint) {
             |
             |    /**
             |     * No description available
+            |$jsDocParameters
             |     * @returns {Promise<$jsReturnDataType>}
             |     */
-            |    async $functionName($jsFunctionParameters){
-            |        let response = await new ServerCallerInt()
+            |    async $jsFunctionName($jsFunctionParameters){
+            |        return await new ServerCallerInt()
             |            .setPath('${endpoint.path}')
             |            .callWithPromise();
-            |        return response;
             |    }
             |
         """.trimMargin()

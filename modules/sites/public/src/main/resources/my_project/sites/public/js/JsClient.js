@@ -1,3 +1,4 @@
+ // noinspection JSUnusedGlobalSymbols
 /**
  * The purpose of this class is to send requests to the server.
  * There is one function per endpoint in the API.
@@ -9,35 +10,37 @@ export class ServerCaller {
 
     /**
      * No description available
+     * @param {string} name
+     * @param {string} age
+     * @param {string} date
      * @returns {Promise<string>}
      */
     async second(name, age, date){
-        let response = await new ServerCallerInt()
+        return await new ServerCallerInt()
             .setPath('/api/second')
             .callWithPromise();
-        return response;
     }
 
     /**
      * No description available
+
      * @returns {Promise<string>}
      */
     async myOtherEndpoint(){
-        let response = await new ServerCallerInt()
+        return await new ServerCallerInt()
             .setPath('myOtherEndpoint')
             .callWithPromise();
-        return response;
     }
 
     /**
      * No description available
+
      * @returns {Promise<string>}
      */
     async myEndpoint(){
-        let response = await new ServerCallerInt()
+        return await new ServerCallerInt()
             .setPath('/api/v1/myEndpoint')
             .callWithPromise();
-        return response;
     }
 }
 

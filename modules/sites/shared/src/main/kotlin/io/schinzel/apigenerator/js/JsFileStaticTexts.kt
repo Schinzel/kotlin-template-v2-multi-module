@@ -2,6 +2,7 @@ package io.schinzel.apigenerator.js
 
 object JsFileStaticTexts {
     val HEADER = """
+            | // noinspection JSUnusedGlobalSymbols
             |/**
             | * The purpose of this class is to send requests to the server.
             | * There is one function per endpoint in the API.
