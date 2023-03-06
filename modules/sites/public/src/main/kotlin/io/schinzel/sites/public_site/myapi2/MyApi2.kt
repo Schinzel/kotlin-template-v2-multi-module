@@ -5,10 +5,9 @@ import io.schinzel.basicutils.RandomUtil
 import se.refur.javalin.Api
 import se.refur.javalin.Param
 import se.refur.javalin.ParameterType
-import java.time.LocalDate
 
 class MyApi2 {
-    @Api(type = HandlerType.GET, path = "/api/second", accessRole = "ADMIN")
+    @Api(type = HandlerType.POST, path = "/api/second", accessRole = "ADMIN")
     fun apiQueryEndpoint(
         @Param("name", ParameterType.QUERY) userName: String,
         @Param("age", ParameterType.QUERY) userAge: Int,

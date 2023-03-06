@@ -7,12 +7,12 @@ import se.refur.javalin.Api
 
 class MyApi1 {
 
-    @Api(type = HandlerType.GET, path = "/api/v1/myEndpoint", accessRole = "PUBLIC")
+    @Api(type = HandlerType.POST, path = "/api/v1/myEndpoint", accessRole = "PUBLIC")
     fun myEndpoint(): String {
         return "Hello World " + RandomUtil.getRandomString(5)
     }
 
-    @Api(type = HandlerType.GET, path = "myOtherEndpoint", accessRole = "PUBLIC")
+    @Api(type = HandlerType.POST, path = "myOtherEndpoint", accessRole = "PUBLIC")
     fun myOtherEndpoint(): String {
         return "Hello World " + RandomUtil.getRandomString(5)
     }

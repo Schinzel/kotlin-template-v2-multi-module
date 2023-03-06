@@ -1,5 +1,5 @@
 export class Bapp {
     bappIt(){
-        return "Bapped it!"
+        console.log("Bapped it!")
     }
 }
