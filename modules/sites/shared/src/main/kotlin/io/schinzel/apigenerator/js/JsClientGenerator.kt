@@ -3,12 +3,10 @@ package io.schinzel.apigenerator.js
 
 import io.schinzel.apigenerator.Endpoint
 import io.schinzel.basic_utils_kotlin.println
-import io.schinzel.basic_utils_kotlin.printlnWithPrefix
 import io.schinzel.basicutils.file.FileWriter
 import org.reflections.Reflections
 import org.reflections.scanners.Scanners.MethodsAnnotated
 import se.refur.javalin.Api
-import java.lang.reflect.Method
 
 
 /**
