@@ -12,13 +12,15 @@
     import {Bapp} from "./Bapp.js";
     import {Monkey} from "./shared/Monkey.js";
     import {ServerCaller} from "./js/JsClient.js";
-
-
+    
     new Bapp().bappIt()
+
     new Monkey().doIt()
+
     let response = await new ServerCaller()
         .myEndpoint()
     console.log('response' + response)
+
     new ServerCaller()
         .myEndpoint()
         .then(response => console.log('response' + response))
