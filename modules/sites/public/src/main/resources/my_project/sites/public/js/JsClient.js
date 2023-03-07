@@ -112,6 +112,17 @@ export class ServerCaller {
     /**
      * No description available
      *
+     * @returns {Promise<number>}
+     */
+    async myThirdEndpoint(){
+        return await new ServerCallerInt()
+            .setPath('/api/v1/myThirdEndpoint')
+            .callWithPromise();
+    }
+
+    /**
+     * No description available
+     *
      * @returns {Promise<string>}
      */
     async myEndpoint(){

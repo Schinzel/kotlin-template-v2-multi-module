@@ -25,6 +25,7 @@ enum class MyAccessRoles : RouteRole {
 class PublicWebServer {
     init {
         MyDb()
+        JsClientGen.generate()
 
         // Setup roles for endpoints
         JavalinAnnotation.setRoles(MyAccessRoles.values().associateBy { it.name })

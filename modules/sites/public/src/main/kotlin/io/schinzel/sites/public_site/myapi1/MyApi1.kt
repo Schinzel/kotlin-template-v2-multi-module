@@ -21,6 +21,10 @@ class MyApi1 {
     }
 
 
+    @Api(type = HandlerType.POST, path = "/api/v1/myThirdEndpoint", accessRole = "PUBLIC")
+    fun myThirdEndpoint(): Int {
+        return RandomUtil.getRandomNumber(10_000, 90_000)
+    }
 }
 
 data class MyFirstDto(
