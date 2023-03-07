@@ -21,7 +21,7 @@ class JsFunction(endpoint: Endpoint) {
     val jsFunction: String
 
     init {
-        val jsDocParameters = endpoint.parameters
+        var jsDocParameters = endpoint.parameters
             .joinToString("\n") { endpointParameter ->
                 val parameterName = endpointParameter.name
                 val jsDataType = JsDataTypeMapper
@@ -29,12 +29,15 @@ class JsFunction(endpoint: Endpoint) {
 
                 "     * @param {$jsDataType} $parameterName"
             }
+        if (jsDocParameters.isEmpty()) {
+            jsDocParameters = "     *"
+        }
         val jsFunctionName = endpoint.path.substringAfterLast("/")
         val jsFunctionParameters = endpoint.parameters
             .joinToString(", ") { endpointParameter ->
                 endpointParameter.name
             }
-        val jsReturnDataType = JsDataTypeMapper.getJsDataType(endpoint.returnDataType)
+        val jsReturnDataType = JsDataTypeMapper.getJsDataType(endpoint.returnDataTypeName)
         jsFunction = """
             |
             |    /**

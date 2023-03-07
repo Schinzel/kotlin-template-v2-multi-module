@@ -6,6 +6,83 @@
  * set set up with Javalin annotations.
  */
 
+ // noinspection JSUnusedLocalSymbols
+/**
+ * This class holds methods common to all transpiled classes.
+ */
+class DataObject {
+    // noinspection JSUnusedGlobalSymbols
+    /**
+     * return {object} This instance as a json object
+     */
+    asJsonObject() {
+        return JSON.parse(JSON.stringify(this));
+    }
+
+    // noinspection JSUnusedGlobalSymbols
+    /**
+     * return {string} This instance as a json string
+     */
+    asJsonString() {
+        return JSON.stringify(this);
+    }
+
+    // noinspection JSUnusedGlobalSymbols
+    /**
+     * return {object} A clone of this object
+     */
+    clone() {
+        return new this.constructor(this.asJsonObject());
+    }
+}
+
+export class MyFirstDto extends DataObject {
+    constructor(json) {
+        super();
+        if (json) {
+            /**
+             * @private
+             */
+            this.age = parseInt(json.age);
+            /**
+             * @private
+             */
+            this.firstName = json.firstName;
+            /**
+             * @private
+             */
+            this.secondName = json.secondName;
+        }
+    }
+
+    // noinspection JSUnusedGlobalSymbols
+    /**
+     * @return {number} 
+     */
+    getAge() {
+        return this.age;
+    }
+    
+    // noinspection JSUnusedGlobalSymbols
+    /**
+     * @return {string} 
+     */
+    getFirstName() {
+        return this.firstName;
+    }
+    
+    // noinspection JSUnusedGlobalSymbols
+    /**
+     * @return {string} 
+     */
+    getSecondName() {
+        return this.secondName;
+    }
+    
+
+
+}
+
 export class ServerCaller {
 
     /**
@@ -23,8 +100,8 @@ export class ServerCaller {
 
     /**
      * No description available
-
-     * @returns {Promise<string>}
+     *
+     * @returns {Promise<MyFirstDto>}
      */
     async myOtherEndpoint(){
         return await new ServerCallerInt()
@@ -34,7 +111,7 @@ export class ServerCaller {
 
     /**
      * No description available
-
+     *
      * @returns {Promise<string>}
      */
     async myEndpoint(){
@@ -208,36 +285,6 @@ function toJSON(str) {
         return JSON.parse(str);
     } catch (e) {
         return str;
-    }
-}
-
- // noinspection JSUnusedLocalSymbols
-/**
- * This class holds methods common to all transpiled classes.
- */
-class DataObject {
-    // noinspection JSUnusedGlobalSymbols
-    /**
-     * return {object} This instance as a json object
-     */
-    asJsonObject() {
-        return JSON.parse(JSON.stringify(this));
-    }
-
-    // noinspection JSUnusedGlobalSymbols
-    /**
-     * return {string} This instance as a json string
-     */
-    asJsonString() {
-        return JSON.stringify(this);
-    }
-
-    // noinspection JSUnusedGlobalSymbols
-    /**
-     * return {object} A clone of this object
-     */
-    clone() {
-        return new this.constructor(this.asJsonObject());
     }
 }
 

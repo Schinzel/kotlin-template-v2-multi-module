@@ -4,6 +4,9 @@ package io.schinzel.apigenerator.js
 import io.schinzel.apigenerator.Endpoint
 import io.schinzel.basic_utils_kotlin.println
 import io.schinzel.basicutils.file.FileWriter
+import io.schinzel.jstranspiler.transpiler.IToJavaScript
+import io.schinzel.jstranspiler.transpiler.KotlinClass
+import io.schinzel.jstranspiler.transpiler.KotlinEnum
 import org.reflections.Reflections
 import org.reflections.scanners.Scanners.MethodsAnnotated
 import se.refur.javalin.Api
@@ -36,15 +39,41 @@ class JsClientGenerator(sourcePackageNames: List<String>, destinationFile: Strin
             .getMethodsAnnotatedWith(Api::class.java)
             .map { Endpoint(it) }
 
-        val jsFunctions = endpoints.joinToString("") { JsFunction(it).jsFunction }
+        val dtoClassesAsJs = endpoints.joinToString("") { endpoint ->
+
+            fun getJsFromDto(dto: Class<*>): String {
+                val dto: Class<*> = endpoint.returnDataType
+                val transpiler: IToJavaScript = when (dto.isEnum) {
+                    true -> KotlinEnum(dto)
+                    false -> KotlinClass(dto)
+                }
+                return transpiler.toJavaScript()
+            }
+
+            val sb = StringBuilder()
+            if (JsDataTypeMapper.isDto(endpoint.returnDataTypeName)) {
+                val js = getJsFromDto(endpoint.returnDataType)
+                sb.append(js)
+            }
+//            endpoint.parameters.forEach { param ->
+//                param.println()
+//            }
+            sb.toString()
+        }
+
+        val jsFunctions = endpoints.joinToString("") { endpoint ->
+            JsFunction(endpoint).jsFunction
+        }
+
 
         val fileContent = "" +
                 JsFileStaticTexts.HEADER +
+                JsFileStaticTexts.DATA_OBJECT_CLASS +
+                dtoClassesAsJs +
                 ServerCallerStaticTexts.start +
                 jsFunctions +
                 ServerCallerStaticTexts.end +
-                JsFileStaticTexts.SERVER_CALLER_INTERNAL_CLASS +
-                JsFileStaticTexts.DATA_OBJECT_CLASS
+                JsFileStaticTexts.SERVER_CALLER_INTERNAL_CLASS
 
         FileWriter.writer()
             .fileName(destinationFile)
@@ -54,9 +83,10 @@ class JsClientGenerator(sourcePackageNames: List<String>, destinationFile: Strin
         // Calc execution time
         val jobExecutionTimeInSeconds = (System.nanoTime() - startExecutionTime) /
                 1_000_000_000
+        val numberOfEndpoints = endpoints.size
         val feedback = "JsClientGenerator ran! " +
                 "Generated a file named $destinationFile. " +
-                "0000 Javalin endpoints can now be invoked using the JsClient. " +
+                "$numberOfEndpoints Javalin endpoints can now be invoked using the JsClient. " +
                 "The job took $jobExecutionTimeInSeconds seconds. "
         feedback.println()
     }
