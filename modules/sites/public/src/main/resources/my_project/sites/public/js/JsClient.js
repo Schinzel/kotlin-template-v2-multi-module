@@ -105,7 +105,7 @@ export class ServerCaller {
      */
     async myOtherEndpoint(){
         return await new ServerCallerInt()
-            .setPath('myOtherEndpoint')
+            .setPath('/apa/myOtherEndpoint')
             .callWithPromise();
     }
 

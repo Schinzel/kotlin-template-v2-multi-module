@@ -11,7 +11,7 @@ class MyApi1 {
         return "Hello World " + RandomUtil.getRandomString(5)
     }
 
-    @Api(type = HandlerType.POST, path = "myOtherEndpoint", accessRole = "PUBLIC")
+    @Api(type = HandlerType.POST, path = "/apa/myOtherEndpoint", accessRole = "PUBLIC")
     fun myOtherEndpoint(): MyFirstDto {
         return MyFirstDto(
             firstName = "John",
