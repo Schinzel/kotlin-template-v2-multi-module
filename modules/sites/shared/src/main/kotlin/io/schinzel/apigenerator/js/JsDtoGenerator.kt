@@ -5,6 +5,7 @@ import io.schinzel.jstranspiler.transpiler.IToJavaScript
 import io.schinzel.jstranspiler.transpiler.KotlinClass
 import io.schinzel.jstranspiler.transpiler.KotlinEnum
 
+
 class JsDtoGenerator(endpoints: List<Endpoint>) {
     val javaScript: String
 

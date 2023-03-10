@@ -54,20 +54,6 @@ class JsClientGenerator(sourcePackageNames: List<String>, destinationFile: Strin
 
     companion object {
 
-        private fun compileUserFeedback(
-            destinationFile: String,
-            numberOfEndpoints: Int,
-            startExecutionTime: Long
-        ): String {
-            // Calc execution time
-            val jobExecutionTimeInSeconds = (System.nanoTime() - startExecutionTime) /
-                    1_000_000_000
-            return "JsClientGenerator ran! " +
-                    "Generated a file named $destinationFile. " +
-                    "$numberOfEndpoints Javalin endpoints can now be invoked using the JsClient. " +
-                    "The job took $jobExecutionTimeInSeconds seconds. "
-        }
-
         private fun validateFile(fileName: String) {
             if (!fileName.endsWith(".js")) {
                 throw Exception("Destination file must have the extension '.js'")
@@ -83,12 +69,12 @@ class JsClientGenerator(sourcePackageNames: List<String>, destinationFile: Strin
         }
 
 
-        private fun getFileContent(dtoClassesAsJs: String, functionsAsJs: String): String {
+        private fun getFileContent(dtoClassesAsJs: String, endpointsAsJs: String): String {
             return JsCodeHeader.JAVA_SCRIPT +
                     JsCodeDataObjectClass.JAVA_SCRIPT +
                     dtoClassesAsJs +
                     "export class ServerCaller {\n" +
-                    functionsAsJs +
+                    endpointsAsJs +
                     "}\n" +
                     JsCodeInternalServerCaller.JAVA_SCRIPT
         }
@@ -99,6 +85,21 @@ class JsClientGenerator(sourcePackageNames: List<String>, destinationFile: Strin
                 .fileName(destinationFile)
                 .content(fileContent)
                 .write()
+        }
+
+
+        private fun compileUserFeedback(
+            destinationFile: String,
+            numberOfEndpoints: Int,
+            startExecutionTime: Long
+        ): String {
+            // Calc execution time
+            val jobExecutionTimeInSeconds = (System.nanoTime() - startExecutionTime) /
+                    1_000_000_000
+            return "JsClientGenerator ran! " +
+                    "Generated a file named $destinationFile. " +
+                    "$numberOfEndpoints Javalin endpoints can now be invoked using the JsClient. " +
+                    "The job took $jobExecutionTimeInSeconds seconds. "
         }
     }
 }
