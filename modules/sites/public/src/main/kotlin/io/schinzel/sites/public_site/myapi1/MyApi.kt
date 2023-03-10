@@ -21,7 +21,7 @@ class MyApi {
         type = HandlerType.POST, path = "/api/v1/doubleIt", accessRole = "PUBLIC",
         description = "Double a number"
     )
-    fun doubleIt(@Param("anyNumber", ParameterType.FORM, "Any number") anyNumber: Int): Int {
+    fun doubleIt(@Param("anyNumber4", ParameterType.FORM, "Any number") anyNumber: Int): Int {
         return anyNumber * 2
     }
 
@@ -44,7 +44,6 @@ class MyApi {
             age = 46
         )
     }
-
 }
 
 data class PersonDto(

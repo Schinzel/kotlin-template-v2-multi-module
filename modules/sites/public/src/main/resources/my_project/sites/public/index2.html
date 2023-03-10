@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My First Title</title>
+    <!-- jQuery -->
+    <script src="/shared/libs/jquery.min.js"></script>
+</head>
+<body>
+<h1>Public site</h1>
+<script type="module">
+
+    $.ajax({
+        type: "POST",
+        url: "http://127.0.0.1:5555/api/v1/myEndpoint",
+        data: "",
+        cache: true,
+        timeout: 6000,
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        processData: true
+    })
+        .done((response) => {
+            console.log("response: " + response);
+        })
+        .fail((jqXHR) => {
+            console.log("FAIL ");
+            console.log(jqXHR.responseText + " " + jqXHR.status);
+        });
+
+
+
+    if (true) {
+        $.ajax({
+            type: "POST",
+            url: "http://127.0.0.1:5555/api/v1/doubleIt",
+            data: {'anyNumber4': 66},
+            cache: true,
+            timeout: 6000,
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            processData: true
+        })
+            .done((response) => {
+                console.log("response: " + response);
+            })
+            .fail((jqXHR) => {
+                console.log("FAIL ");
+                console.log(jqXHR.responseText + " " + jqXHR.status);
+            });
+    }
+</script>
+</body>
+</html>

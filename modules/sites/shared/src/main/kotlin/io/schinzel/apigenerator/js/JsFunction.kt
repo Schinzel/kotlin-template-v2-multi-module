@@ -20,7 +20,7 @@ import io.schinzel.apigenerator.EndpointParameter
  */
 class JsFunction(endpoint: Endpoint) {
 
-    val jsFunction: String
+    val javaScript: String
 
     init {
         // Get JsDoc parameters
@@ -61,7 +61,7 @@ class JsFunction(endpoint: Endpoint) {
 
 
         val jsReturnDataType = JsDataTypeMapper.getJsDataType(endpoint.returnDataTypeName)
-        jsFunction = """
+        javaScript = """
                 |
                 |
                 |    /**

@@ -4,9 +4,6 @@ package io.schinzel.apigenerator.js
 import io.schinzel.apigenerator.Endpoint
 import io.schinzel.basic_utils_kotlin.println
 import io.schinzel.basicutils.file.FileWriter
-import io.schinzel.jstranspiler.transpiler.IToJavaScript
-import io.schinzel.jstranspiler.transpiler.KotlinClass
-import io.schinzel.jstranspiler.transpiler.KotlinEnum
 import org.reflections.Reflections
 import org.reflections.scanners.Scanners.MethodsAnnotated
 import se.refur.javalin.Api
@@ -33,70 +30,73 @@ class JsClientGenerator(sourcePackageNames: List<String>, destinationFile: Strin
         val startExecutionTime = System.nanoTime()
         // Check so that argument destination file name is ok
         validateFile(destinationFile)
-
-
-        val endpoints: List<Endpoint> = Reflections(sourcePackageNames, MethodsAnnotated)
-            .getMethodsAnnotatedWith(Api::class.java)
-            .map { Endpoint(it) }
-
+        // Get all endpoints
+        val endpoints: List<Endpoint> = getEndpoints(sourcePackageNames)
+        // Generate JavaScript for DTOs
         val dtoClassesAsJs = endpoints.joinToString("") { endpoint ->
-
-            fun getJsFromDto(dto: Class<*>): String {
-                val dto: Class<*> = endpoint.returnDataType
-                val transpiler: IToJavaScript = when (dto.isEnum) {
-                    true -> KotlinEnum(dto)
-                    false -> KotlinClass(dto)
-                }
-                return transpiler.toJavaScript()
-            }
-
-            val sb = StringBuilder()
-            if (JsDataTypeMapper.isDto(endpoint.returnDataTypeName)) {
-                val js = getJsFromDto(endpoint.returnDataType)
-                sb.append(js)
-            }
-//            endpoint.parameters.forEach { param ->
-//                param.println()
-//            }
-            sb.toString()
+            JsDataDto(endpoint).javasScript
         }
-
-        val jsFunctions = endpoints.joinToString("") { endpoint ->
-            JsFunction(endpoint).jsFunction
+        // Generate a JavaScript function for each endpoints
+        val endpointsAsJs = endpoints.joinToString("") { endpoint ->
+            JsFunction(endpoint).javaScript
         }
-
-
-        val fileContent = "" +
-                JsFileStaticTexts.HEADER +
-                JsFileStaticTexts.DATA_OBJECT_CLASS +
-                dtoClassesAsJs +
-                ServerCallerStaticTexts.start +
-                jsFunctions +
-                ServerCallerStaticTexts.end +
-                JsFileStaticTexts.SERVER_CALLER_INTERNAL_CLASS
-
-        FileWriter.writer()
-            .fileName(destinationFile)
-            .content(fileContent)
-            .write()
-
-        // Calc execution time
-        val jobExecutionTimeInSeconds = (System.nanoTime() - startExecutionTime) /
-                1_000_000_000
-        val numberOfEndpoints = endpoints.size
-        val feedback = "JsClientGenerator ran! " +
-                "Generated a file named $destinationFile. " +
-                "$numberOfEndpoints Javalin endpoints can now be invoked using the JsClient. " +
-                "The job took $jobExecutionTimeInSeconds seconds. "
-        feedback.println()
+        // Compile file content
+        val fileContent = getFileContent(dtoClassesAsJs, endpointsAsJs)
+        // Write file content to file
+        writeContentToFile(destinationFile, fileContent)
+        // Print user feedback
+        compileUserFeedback(destinationFile, endpoints.size, startExecutionTime)
+            .println()
     }
 
 
     companion object {
+
+        private fun compileUserFeedback(
+            destinationFile: String,
+            numberOfEndpoints: Int,
+            startExecutionTime: Long
+        ): String {
+            // Calc execution time
+            val jobExecutionTimeInSeconds = (System.nanoTime() - startExecutionTime) /
+                    1_000_000_000
+            return "JsClientGenerator ran! " +
+                    "Generated a file named $destinationFile. " +
+                    "$numberOfEndpoints Javalin endpoints can now be invoked using the JsClient. " +
+                    "The job took $jobExecutionTimeInSeconds seconds. "
+        }
+
         private fun validateFile(fileName: String) {
             if (!fileName.endsWith(".js")) {
                 throw Exception("Destination file must have the extension '.js'")
             }
+        }
+
+
+        private fun getEndpoints(sourcePackageNames: List<String>): List<Endpoint> {
+            return Reflections(sourcePackageNames, MethodsAnnotated)
+                .getMethodsAnnotatedWith(Api::class.java)
+                .map { Endpoint(it) }
+                .sortedBy { it.functionName }
+        }
+
+
+        private fun getFileContent(dtoClassesAsJs: String, functionsAsJs: String): String {
+            return JsFileStaticTexts.HEADER +
+                    JsFileStaticTexts.DATA_OBJECT_CLASS +
+                    dtoClassesAsJs +
+                    ServerCallerStaticTexts.start +
+                    functionsAsJs +
+                    ServerCallerStaticTexts.end +
+                    JsFileStaticTexts.SERVER_CALLER_INTERNAL_CLASS
+        }
+
+
+        private fun writeContentToFile(destinationFile: String, fileContent: String) {
+            FileWriter.writer()
+                .fileName(destinationFile)
+                .content(fileContent)
+                .write()
         }
     }
 }

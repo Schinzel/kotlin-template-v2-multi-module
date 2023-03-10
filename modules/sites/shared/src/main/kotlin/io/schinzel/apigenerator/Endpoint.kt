@@ -8,6 +8,7 @@ import java.lang.reflect.Method
 class Endpoint(method: Method) {
     private val apiAnnotation: Api = method.getAnnotation(Api::class.java)
     val path: String = apiAnnotation.path
+    val functionName: String = apiAnnotation.path.substringAfterLast("/")
     val requestType: HandlerType = apiAnnotation.type
     val parameters: List<EndpointParameter> = method.parameters
         .filter { it.isAnnotationPresent(Param::class.java) }

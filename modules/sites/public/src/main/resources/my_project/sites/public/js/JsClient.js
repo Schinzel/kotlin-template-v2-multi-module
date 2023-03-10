@@ -87,31 +87,14 @@ export class ServerCaller {
 
 
     /**
-     * No description available
-     * @param {string} name
-     * @param {number} age
-     * @param {number} something
-     * @returns {Promise<string>}
-     */
-    async second(name, age, something){
-        return await new ServerCallerInt()
-            .setPath('/api/second')
-            .addArg('name', name)
-            .addArg('age', age)
-            .addArg('something', something)            
-            .callWithPromise();
-    }
-
-
-    /**
      * Double a number
-     * @param {number} anyNumber - Any number
+     * @param {number} anyNumber4 - Any number
      * @returns {Promise<number>}
      */
-    async doubleIt(anyNumber){
+    async doubleIt(anyNumber4){
         return await new ServerCallerInt()
             .setPath('/api/v1/doubleIt')
-            .addArg('anyNumber', anyNumber)            
+            .addArg('anyNumber4', anyNumber4)            
             .callWithPromise();
     }
 
@@ -142,6 +125,23 @@ export class ServerCaller {
         return await new ServerCallerInt()
             .setPath('/api/v1/myEndpoint')
             
+            .callWithPromise();
+    }
+
+
+    /**
+     * No description available
+     * @param {string} name
+     * @param {number} age
+     * @param {number} something
+     * @returns {Promise<string>}
+     */
+    async second(name, age, something){
+        return await new ServerCallerInt()
+            .setPath('/api/second')
+            .addArg('name', name)
+            .addArg('age', age)
+            .addArg('something', something)            
             .callWithPromise();
     }
 }
