@@ -14,6 +14,7 @@ class Endpoint(method: Method) {
         .map { EndpointParameter(it) }
     val returnDataTypeName: String = method.returnType.simpleName
     val returnDataType: Class<*> = method.returnType
+    val description: String = apiAnnotation.description
 
 
     override fun toString(): String {

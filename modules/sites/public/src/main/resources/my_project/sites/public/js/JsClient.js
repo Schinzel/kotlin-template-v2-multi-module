@@ -104,8 +104,8 @@ export class ServerCaller {
 
 
     /**
-     * No description available
-     * @param {number} anyNumber
+     * Double a number
+     * @param {number} anyNumber - Any number
      * @returns {Promise<number>}
      */
     async doubleIt(anyNumber){
@@ -117,7 +117,24 @@ export class ServerCaller {
 
 
     /**
-     * No description available
+     * Find a good match for a man
+     * @param {string} firstName - The first name of the person to find a match for
+     * @param {string} lastName - The last name of the person to find a match for
+     * @param {number} age - The age of the person to find a match for
+     * @returns {Promise<PersonDto>}
+     */
+    async findGoodMatch(firstName, lastName, age){
+        return await new ServerCallerInt()
+            .setPath('/api/findGoodMatch')
+            .addArg('firstName', firstName)
+            .addArg('lastName', lastName)
+            .addArg('age', age)            
+            .callWithPromise();
+    }
+
+
+    /**
+     * My first endpoint
      *
      * @returns {Promise<string>}
      */
@@ -125,23 +142,6 @@ export class ServerCaller {
         return await new ServerCallerInt()
             .setPath('/api/v1/myEndpoint')
             
-            .callWithPromise();
-    }
-
-
-    /**
-     * No description available
-     * @param {string} firstName
-     * @param {string} lastName
-     * @param {number} age
-     * @returns {Promise<PersonDto>}
-     */
-    async getWife(firstName, lastName, age){
-        return await new ServerCallerInt()
-            .setPath('/api/getWife')
-            .addArg('firstName', firstName)
-            .addArg('lastName', lastName)
-            .addArg('age', age)            
             .callWithPromise();
     }
 }

@@ -1,6 +1,7 @@
 package io.schinzel.apigenerator.js
 
 import io.schinzel.apigenerator.Endpoint
+import io.schinzel.apigenerator.EndpointParameter
 
 /**
  *    /**
@@ -24,18 +25,26 @@ class JsFunction(endpoint: Endpoint) {
     init {
         // Get JsDoc parameters
         var jsDocParameters = endpoint.parameters
-            .joinToString("\n") { endpointParameter ->
-                val parameterName = endpointParameter.name
+            .joinToString("\n") { endpointParameter: EndpointParameter ->
                 val jsDataType = JsDataTypeMapper
                     .getJsDataType(endpointParameter.dataType)
+                val jsParameterName = endpointParameter.name
+                val jsDescription  = when (endpointParameter.description.length) {
+                    0 -> ""
+                    else -> " - " + endpointParameter.description
+                }
 
-                "     * @param {$jsDataType} $parameterName"
+                "     * @param {$jsDataType} $jsParameterName$jsDescription"
             }
         if (jsDocParameters.isEmpty()) {
             jsDocParameters = "     *"
         }
 
         val jsFunctionName = endpoint.path.substringAfterLast("/")
+        val jsFunctionDescription = when (endpoint.description.isEmpty()){
+            true -> "No description available"
+            else -> endpoint.description
+        }
         val jsFunctionParameters = endpoint.parameters
             .joinToString(", ") { endpointParameter ->
                 endpointParameter.name
@@ -56,7 +65,7 @@ class JsFunction(endpoint: Endpoint) {
                 |
                 |
                 |    /**
-                |     * No description available
+                |     * $jsFunctionDescription
                 |$jsDocParameters
                 |     * @returns {Promise<$jsReturnDataType>}
                 |     */

@@ -9,6 +9,7 @@ class EndpointParameter(parameter: Parameter) {
     val name = annotation.paramName
     val type = annotation.parameterType
     val dataType = parameter.type.simpleName
+    val description = annotation.description
 
     init {
         Thrower.throwIfFalse(parameter.isAnnotationPresent(Param::class.java))
