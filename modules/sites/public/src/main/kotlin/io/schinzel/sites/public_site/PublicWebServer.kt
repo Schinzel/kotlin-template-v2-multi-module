@@ -4,7 +4,7 @@ import io.javalin.Javalin
 import io.javalin.core.security.RouteRole
 import io.javalin.http.staticfiles.Location
 import io.schinzel.logic.db.MyDb
-import io.schinzel.sites.public_site.myapi1.MyApi1
+import io.schinzel.sites.public_site.myapi1.MyApi
 import se.refur.javalin.JavalinAnnotation
 import se.refur.javalin.exposeClassEndpoints
 
@@ -43,7 +43,7 @@ class PublicWebServer {
             config.accessManager { handler, ctx, _ -> handler.handle(ctx) }
         }
             .get("/") { ctx -> ctx.result("Hello Public World") }
-            .exposeClassEndpoints(MyApi1::class)
+            .exposeClassEndpoints(MyApi::class)
             .start(5555)
     }
 }

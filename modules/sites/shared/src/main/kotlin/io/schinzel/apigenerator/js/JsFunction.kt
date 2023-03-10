@@ -1,6 +1,7 @@
 package io.schinzel.apigenerator.js
 
 import io.schinzel.apigenerator.Endpoint
+
 /**
  *    /**
  *      * No description available
@@ -21,6 +22,7 @@ class JsFunction(endpoint: Endpoint) {
     val jsFunction: String
 
     init {
+        // Get JsDoc parameters
         var jsDocParameters = endpoint.parameters
             .joinToString("\n") { endpointParameter ->
                 val parameterName = endpointParameter.name
@@ -32,26 +34,40 @@ class JsFunction(endpoint: Endpoint) {
         if (jsDocParameters.isEmpty()) {
             jsDocParameters = "     *"
         }
+
         val jsFunctionName = endpoint.path.substringAfterLast("/")
         val jsFunctionParameters = endpoint.parameters
             .joinToString(", ") { endpointParameter ->
                 endpointParameter.name
             }
+
+        val jsServerCallerArguments: String = when (endpoint.parameters.size) {
+            0 -> ""
+            else -> endpoint.parameters
+                .joinToString("\n") { endpointParameter ->
+                    val parameterName = endpointParameter.name
+                    "            .addArg('$parameterName', $parameterName)"
+                }
+        }
+
+
         val jsReturnDataType = JsDataTypeMapper.getJsDataType(endpoint.returnDataTypeName)
         jsFunction = """
-            |
-            |    /**
-            |     * No description available
-            |$jsDocParameters
-            |     * @returns {Promise<$jsReturnDataType>}
-            |     */
-            |    async $jsFunctionName($jsFunctionParameters){
-            |        return await new ServerCallerInt()
-            |            .setPath('${endpoint.path}')
-            |            .callWithPromise();
-            |    }
-            |
-        """.trimMargin()
+                |
+                |
+                |    /**
+                |     * No description available
+                |$jsDocParameters
+                |     * @returns {Promise<$jsReturnDataType>}
+                |     */
+                |    async $jsFunctionName($jsFunctionParameters){
+                |        return await new ServerCallerInt()
+                |            .setPath('${endpoint.path}')
+                |$jsServerCallerArguments            
+                |            .callWithPromise();
+                |    }
+                |
+                """.trimMargin()
     }
 
 }

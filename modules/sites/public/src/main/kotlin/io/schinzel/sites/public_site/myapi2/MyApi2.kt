@@ -7,7 +7,11 @@ import se.refur.javalin.Param
 import se.refur.javalin.ParameterType
 
 class MyApi2 {
-    @Api(type = HandlerType.POST, path = "/api/second", accessRole = "ADMIN")
+    @Api(
+        type = HandlerType.POST,
+        path = "/api/second",
+        accessRole = "ADMIN",
+    )
     fun apiQueryEndpoint(
         @Param("name", ParameterType.QUERY) userName: String,
         @Param("age", ParameterType.QUERY) userAge: Int,

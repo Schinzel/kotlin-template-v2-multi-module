@@ -36,7 +36,7 @@ class DataObject {
     }
 }
 
-export class MyFirstDto extends DataObject {
+export class PersonDto extends DataObject {
     constructor(json) {
         super();
         if (json) {
@@ -85,6 +85,7 @@ export class MyFirstDto extends DataObject {
 
 export class ServerCaller {
 
+
     /**
      * No description available
      * @param {string} name
@@ -95,30 +96,25 @@ export class ServerCaller {
     async second(name, age, something){
         return await new ServerCallerInt()
             .setPath('/api/second')
+            .addArg('name', name)
+            .addArg('age', age)
+            .addArg('something', something)            
             .callWithPromise();
     }
 
-    /**
-     * No description available
-     *
-     * @returns {Promise<MyFirstDto>}
-     */
-    async myOtherEndpoint(){
-        return await new ServerCallerInt()
-            .setPath('/apa/myOtherEndpoint')
-            .callWithPromise();
-    }
 
     /**
      * No description available
-     *
+     * @param {number} anyNumber
      * @returns {Promise<number>}
      */
-    async myThirdEndpoint(){
+    async doubleIt(anyNumber){
         return await new ServerCallerInt()
-            .setPath('/api/v1/myThirdEndpoint')
+            .setPath('/api/v1/doubleIt')
+            .addArg('anyNumber', anyNumber)            
             .callWithPromise();
     }
+
 
     /**
      * No description available
@@ -128,6 +124,24 @@ export class ServerCaller {
     async myEndpoint(){
         return await new ServerCallerInt()
             .setPath('/api/v1/myEndpoint')
+            
+            .callWithPromise();
+    }
+
+
+    /**
+     * No description available
+     * @param {string} firstName
+     * @param {string} lastName
+     * @param {number} age
+     * @returns {Promise<PersonDto>}
+     */
+    async getWife(firstName, lastName, age){
+        return await new ServerCallerInt()
+            .setPath('/api/getWife')
+            .addArg('firstName', firstName)
+            .addArg('lastName', lastName)
+            .addArg('age', age)            
             .callWithPromise();
     }
 }
