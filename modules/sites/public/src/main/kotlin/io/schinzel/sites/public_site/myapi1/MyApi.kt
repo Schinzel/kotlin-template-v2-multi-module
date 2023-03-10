@@ -16,16 +16,16 @@ class MyApi {
 
 
     @Api(type = HandlerType.POST, path = "/api/v1/doubleIt", accessRole = "PUBLIC")
-    fun doubleIt(@Param("anyNumber", ParameterType.QUERY) anyNumber: Int): Int {
+    fun doubleIt(@Param("anyNumber", ParameterType.FORM) anyNumber: Int): Int {
         return anyNumber * 2
     }
 
 
     @Api(type = HandlerType.POST, path = "/api/getWife", accessRole = "PUBLIC")
     fun getWife(
-        @Param("firstName", ParameterType.QUERY) firstName: String,
-        @Param("lastName", ParameterType.QUERY) lastName: String,
-        @Param("age", ParameterType.QUERY) age: Int
+        @Param("firstName", ParameterType.FORM) firstName: String,
+        @Param("lastName", ParameterType.FORM) lastName: String,
+        @Param("age", ParameterType.FORM) age: Int
     ): PersonDto {
         firstName.printlnWithPrefix("firstName")
         age.printlnWithPrefix("age")
