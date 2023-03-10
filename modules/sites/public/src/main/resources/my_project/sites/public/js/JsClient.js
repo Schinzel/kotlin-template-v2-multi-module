@@ -1,4 +1,4 @@
- // noinspection JSUnusedGlobalSymbols
+// noinspection JSUnusedGlobalSymbols
 /**
  * The purpose of this class is to send requests to the server.
  * There is one function per endpoint in the API.
@@ -75,8 +75,8 @@ export class PersonDto extends DataObject {
 
 }
 
+// noinspection JSUnusedLocalSymbols
 export class ServerCaller {
-
 
     /**
      * Double a number

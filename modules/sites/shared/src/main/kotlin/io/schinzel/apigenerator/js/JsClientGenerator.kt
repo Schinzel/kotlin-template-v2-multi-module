@@ -24,7 +24,11 @@ import se.refur.javalin.Api
  * "modules/sites/public/src/main/resources/my_project/sites/public/js/JsClient.js"
  *
  */
-class JsClientGenerator(sourcePackageNames: List<String>, destinationFile: String) {
+class JsClientGenerator(
+    sourcePackageNames: List<String>,
+    destinationFile: String,
+    javaScriptClassName: String = "ServerCaller",
+) {
 
     @Suppress("unused")
     constructor(sourcePackageName: String, destinationFile: String)
@@ -43,7 +47,11 @@ class JsClientGenerator(sourcePackageNames: List<String>, destinationFile: Strin
             JsFunction(endpoint).javaScript
         }
         // Compile file content
-        val fileContent = getFileContent(dtoClassesAsJs, endpointsAsJs)
+        val fileContent = JsFileContent(
+            dtoClassesAsJs = dtoClassesAsJs,
+            endpointsAsJs = endpointsAsJs,
+            javaScriptClassName = javaScriptClassName
+        ).javaScript
         // Write file content to file
         writeContentToFile(destinationFile, fileContent)
         // Print user feedback
@@ -66,17 +74,6 @@ class JsClientGenerator(sourcePackageNames: List<String>, destinationFile: Strin
                 .getMethodsAnnotatedWith(Api::class.java)
                 .map { Endpoint(it) }
                 .sortedBy { it.functionName }
-        }
-
-
-        private fun getFileContent(dtoClassesAsJs: String, endpointsAsJs: String): String {
-            return JsCodeHeader.JAVA_SCRIPT +
-                    JsCodeDataObjectClass.JAVA_SCRIPT +
-                    dtoClassesAsJs +
-                    "export class ServerCaller {\n" +
-                    endpointsAsJs +
-                    "}\n" +
-                    JsCodeInternalServerCaller.JAVA_SCRIPT
         }
 
 
