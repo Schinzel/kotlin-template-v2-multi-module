@@ -26,6 +26,7 @@ import se.refur.javalin.Api
  */
 class JsClientGenerator(sourcePackageNames: List<String>, destinationFile: String) {
 
+    @Suppress("unused")
     constructor(sourcePackageName: String, destinationFile: String)
             : this(listOf(sourcePackageName), destinationFile)
 
@@ -37,7 +38,11 @@ class JsClientGenerator(sourcePackageNames: List<String>, destinationFile: Strin
         val endpoints: List<Endpoint> = getEndpoints(sourcePackageNames)
         // Generate JavaScript for DTOs
         val dtoClassesAsJs = endpoints.joinToString("") { endpoint ->
-            JsDataDto(endpoint).javasScript
+            val dto = endpoint.returnDataType
+            when (JsDataTypeMapper.isDto(dto.simpleName)){
+                true -> DtoToJs(dto).javaScript
+                false -> ""
+            }
         }
         // Generate a JavaScript function for each endpoints
         val endpointsAsJs = endpoints.joinToString("") { endpoint ->
