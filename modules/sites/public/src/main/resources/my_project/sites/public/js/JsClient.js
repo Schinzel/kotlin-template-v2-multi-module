@@ -26,14 +26,6 @@ class DataObject {
     asJsonString() {
         return JSON.stringify(this);
     }
-
-    // noinspection JSUnusedGlobalSymbols
-    /**
-     * return {object} A clone of this object
-     */
-    clone() {
-        return new this.constructor(this.asJsonObject());
-    }
 }
 
 export class PersonDto extends DataObject {
@@ -146,8 +138,6 @@ export class ServerCaller {
     }
 }
 
-const REQUEST_TIMEOUT = 60000;
-
 // noinspection JSUnusedGlobalSymbols
 class ServerCallerInt {
     constructor() {
@@ -242,7 +232,7 @@ class ServerCallerInt {
             url: requestPathWithHost,
             data: this._requestArguments,
             cache: true,
-            timeout: REQUEST_TIMEOUT,
+            timeout: 60000,
             contentType: this._contentType,
             processData: this._processData
         })

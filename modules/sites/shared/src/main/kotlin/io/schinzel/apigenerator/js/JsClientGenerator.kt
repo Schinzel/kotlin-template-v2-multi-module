@@ -2,6 +2,9 @@ package io.schinzel.apigenerator.js
 
 
 import io.schinzel.apigenerator.Endpoint
+import io.schinzel.apigenerator.js.static_texts.JsCodeDataObjectClass
+import io.schinzel.apigenerator.js.static_texts.JsCodeHeader
+import io.schinzel.apigenerator.js.static_texts.JsCodeInternalServerCaller
 import io.schinzel.basic_utils_kotlin.println
 import io.schinzel.basicutils.file.FileWriter
 import org.reflections.Reflections
@@ -82,13 +85,13 @@ class JsClientGenerator(sourcePackageNames: List<String>, destinationFile: Strin
 
 
         private fun getFileContent(dtoClassesAsJs: String, functionsAsJs: String): String {
-            return JsFileStaticTexts.HEADER +
-                    JsFileStaticTexts.DATA_OBJECT_CLASS +
+            return JsCodeHeader.JAVA_SCRIPT +
+                    JsCodeDataObjectClass.JAVA_SCRIPT +
                     dtoClassesAsJs +
-                    ServerCallerStaticTexts.start +
+                    "export class ServerCaller {\n" +
                     functionsAsJs +
-                    ServerCallerStaticTexts.end +
-                    JsFileStaticTexts.SERVER_CALLER_INTERNAL_CLASS
+                    "}\n" +
+                    JsCodeInternalServerCaller.JAVA_SCRIPT
         }
 
 

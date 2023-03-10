@@ -1,56 +1,8 @@
-package io.schinzel.apigenerator.js
+package io.schinzel.apigenerator.js.static_texts
 
-object JsFileStaticTexts {
-    val HEADER = """
-            | // noinspection JSUnusedGlobalSymbols
-            |/**
-            | * The purpose of this class is to send requests to the server.
-            | * There is one function per endpoint in the API.
-            | * This class has been automatically generated from the endpoints
-            | * set set up with Javalin annotations.
-            | */
-            |
-            |
-        """.trimMargin()
+object JsCodeInternalServerCaller {
 
-    val DATA_OBJECT_CLASS = """
-            | // noinspection JSUnusedLocalSymbols
-            |/**
-            | * This class holds methods common to all transpiled classes.
-            | */
-            |class DataObject {
-            |    // noinspection JSUnusedGlobalSymbols
-            |    /**
-            |     * return {object} This instance as a json object
-            |     */
-            |    asJsonObject() {
-            |        return JSON.parse(JSON.stringify(this));
-            |    }
-            |
-            |    // noinspection JSUnusedGlobalSymbols
-            |    /**
-            |     * return {string} This instance as a json string
-            |     */
-            |    asJsonString() {
-            |        return JSON.stringify(this);
-            |    }
-            |
-            |    // noinspection JSUnusedGlobalSymbols
-            |    /**
-            |     * return {object} A clone of this object
-            |     */
-            |    clone() {
-            |        return new this.constructor(this.asJsonObject());
-            |    }
-            |}
-            |
-            |
-        """.trimMargin()
-
-
-    var SERVER_CALLER_INTERNAL_CLASS = """
-const REQUEST_TIMEOUT = 60000;
-
+    const val JAVA_SCRIPT = """
 // noinspection JSUnusedGlobalSymbols
 class ServerCallerInt {
     constructor() {
@@ -145,7 +97,7 @@ class ServerCallerInt {
             url: requestPathWithHost,
             data: this._requestArguments,
             cache: true,
-            timeout: REQUEST_TIMEOUT,
+            timeout: 60000,
             contentType: this._contentType,
             processData: this._processData
         })
