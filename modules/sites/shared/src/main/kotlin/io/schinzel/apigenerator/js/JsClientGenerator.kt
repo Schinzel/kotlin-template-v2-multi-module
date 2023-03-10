@@ -37,13 +37,7 @@ class JsClientGenerator(sourcePackageNames: List<String>, destinationFile: Strin
         // Get all endpoints
         val endpoints: List<Endpoint> = getEndpoints(sourcePackageNames)
         // Generate JavaScript for DTOs
-        val dtoClassesAsJs = endpoints.joinToString("") { endpoint ->
-            val dto = endpoint.returnDataType
-            when (JsDataTypeMapper.isDto(dto.simpleName)){
-                true -> DtoToJs(dto).javaScript
-                false -> ""
-            }
-        }
+        val dtoClassesAsJs = JsDtoGenerator(endpoints).javaScript
         // Generate a JavaScript function for each endpoints
         val endpointsAsJs = endpoints.joinToString("") { endpoint ->
             JsFunction(endpoint).javaScript
