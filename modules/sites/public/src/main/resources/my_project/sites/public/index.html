@@ -28,11 +28,11 @@
 
     new ServerCaller()
         .myThirdEndpoint()
-        .then(response => console.log('response 3:' + response))
+        .then(response => console.log('response 3: ' + response))
 
-    // new ServerCaller()
-    //     .myOtherEndpoint()
-    //     .then(response => console.log('response 3:' + response))
+     new ServerCaller()
+         .myOtherEndpoint()
+         .then(response => console.log(response))
 
 </script>
 </body>
