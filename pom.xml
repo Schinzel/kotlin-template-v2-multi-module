@@ -42,12 +42,12 @@
             common code snippets -->
             <artifactId>basic-utils-kotlin</artifactId>
             <groupId>io.schinzel</groupId>
-            <version>0.9.3</version>
+            <version>0.9.4</version>
         </dependency>
         <dependency>
             <groupId>io.schinzel</groupId>
             <artifactId>js-transpiler</artifactId>
-            <version>1.4.3</version>
+            <version>1.4.4</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -57,7 +57,7 @@
         <dependency>
             <groupId>se.refur</groupId>
             <artifactId>javalin</artifactId>
-            <version>1.2.0</version>
+            <version>1.2.15</version>
         </dependency>
 
         <!-- TEST -->
